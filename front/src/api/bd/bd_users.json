@@ -1,0 +1,37 @@
+[
+  {
+    "id": 0,
+    "name": "admin",
+    "email": "admin@admin.ru",
+    "password": "admin",
+    "accessRights": "admin"
+  },
+  {
+    "id": 1,
+    "name": "Rick Sanchez",
+    "email": "rick@bd.ru",
+    "password": "ricksanchez",
+    "accessRights": "analyst"
+  },
+  {
+    "id": 2,
+    "name": "Morty Smith",
+    "email": "morty@bd.ru",
+    "password": "mortysmith",
+    "accessRights": "sales"
+  },
+  {
+    "id": 3,
+    "name": "Summer Smith",
+    "email": "summer@bd.ru",
+    "password": "summersmith",
+    "accessRights": "purchasing"
+  },
+  {
+    "id": 4,
+    "name": "Beth Smith",
+    "email": "beth@bd.ru",
+    "password": "bethsmith",
+    "accessRights": "none"
+  }
+]

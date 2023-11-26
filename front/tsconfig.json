@@ -7,5 +7,61 @@
     {
       "path": "./tsconfig.app.json"
     }
+  ],
+  "commonjs": {
+    "module": "commonjs",
+    "esModuleInterop": true
+  },
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "types": [
+      "vite/client"
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "filesGlob": [
+      "**/*.ts"
+    ],
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost",
+      "ES2022"
+    ]
+  },
+  "include": [
+    "src/**/*",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    ".vscode",
+    "src/**/*.spec.ts"
+  ],
+  "types": [
+    "./types/vue/",
+    "./types/vue-router/",
   ]
 }
