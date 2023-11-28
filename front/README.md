@@ -38,3 +38,10 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Build for production and launch server
+
+```sh
+npm run build-only
+npm run preview
+```

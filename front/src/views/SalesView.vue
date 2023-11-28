@@ -13,5 +13,6 @@ import TheLayoutNamedPages from "@/components/TheLayoutNamedPages.vue";
 </script>
 
 <style scoped lang="scss">
-
+.sales-view {
+}
 </style>

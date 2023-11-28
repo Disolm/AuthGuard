@@ -1,16 +1,23 @@
 <template>
-    <button
+    <component
+        :is="tag!"
         class="button"
         :class="[classForButton, {'button_block': block}]"
+        :[type]="'button'"
     >
         <slot/>
-    </button>
+    </component>
 </template>
 
 <script lang="ts" setup>
 import {computed} from 'vue';
 
 const props = defineProps({
+    tag: {
+        type: String,
+        required: false,
+        default: 'button'
+    },
     variant: {
         type: String,
         required: false,
@@ -23,9 +30,11 @@ const props = defineProps({
         default: false
     }
 })
-
 const classForButton = computed<string>(() => {
     return `button_${props.variant}`
+})
+const type = computed<string>(() => {
+    return props.tag === 'button' ? 'type' : 'null';
 })
 </script>
 

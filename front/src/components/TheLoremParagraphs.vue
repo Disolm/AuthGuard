@@ -2,7 +2,7 @@
     <div class="lorem-paragraphs">
         <div class="lorem-paragraphs__paragraph" v-for="idx in paragraphs">
                 <span :key="idx">
-                    {{ loremText(idx) }}
+                    {{ loremText() }}
                 </span>
         </div>
     </div>
@@ -18,7 +18,7 @@ const props = defineProps({
         required: false
     },
 })
-const loremText = (idx: number): string => {
+const loremText = (): string => {
     const lorem = new LoremIpsum({
         sentencesPerParagraph: {
             max: 40,
@@ -29,7 +29,7 @@ const loremText = (idx: number): string => {
             min: 4
         }
     })
-    return lorem.generateParagraphs(idx)
+    return lorem.generateParagraphs(1)
 }
 </script>
 

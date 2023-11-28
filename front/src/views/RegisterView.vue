@@ -13,18 +13,14 @@
           <UiFormGroup label="Повтор пароля">
               <UiInput v-model="password2" type="password" required minlength="6" />
           </UiFormGroup>
-          <UiFormGroup>
-              <UiCheckbox v-model="agree" name="agree" required>Я согласен с условиями</UiCheckbox>
+          <UiFormGroup label="Роль">
+              <UiDropdown :options="accessRightsArr()" v-model="accessRights" title="-"/>
           </UiFormGroup>
 
           <template #buttons>
-              <UiButton variant="primary" type="submit">Зарегистрироваться</UiButton>
+              <UiButton variant="primary" type="submit">Зарегистрировать</UiButton>
           </template>
 
-          <template #append>
-              Уже есть аккаунт?
-              <UiLink :to="{name: 'login'}">Войдите</UiLink>
-          </template>
           <UiTransitionFade>
               <UiAlert v-if="alert" :text="alert">
                   {{ alert }}
@@ -38,21 +34,21 @@
 import UiInput from "@/components/UiInput.vue";
 import UiForm from "@/components/UiForm.vue";
 import UiFormGroup from "@/components/UiFormGroup.vue";
-import UiCheckbox from "@/components/UiCheckbox.vue";
 import UiButton from "@/components/UiButton.vue";
-import UiLink from "@/components/UiLink.vue";
 import UiAlert from "@/components/UiAlert.vue";
+import UiTransitionFade from "@/components/UiTransitionFade.vue";
+
 import {ref} from "vue";
 import type {Ref} from 'vue'
 import {router} from "@/router";
-import UiTransitionFade from "@/components/UiTransitionFade.vue";
 import {registerUser} from "@/api/authApi";
-import {generateID} from "@/composables/generateID";
+import UiDropdown from "@/components/UiDropdown.vue";
+import {accessRightsArr} from "@/composables/permanent";
 const email: Ref<string> = ref('');
 const fullname: Ref<string>  = ref('');
 const password: Ref<string>  = ref('');
 const password2: Ref<string>  = ref('');
-const agree: Ref<boolean> = ref(false);
+const accessRights: Ref<string> = ref('');
 const alert: Ref<string>  = ref('')
 
 
@@ -60,8 +56,8 @@ const validate = () => {
     if (password.value !== password2.value) {
         return 'Пароли не совпадают';
     }
-    if (!agree.value) {
-        return 'Требуется согласится с условиями';
+    if (!accessRightsArr().map(option => option.text).includes(accessRights.value)) {
+        return 'Не выбрана роль пользователя';
     }
 };
 
@@ -73,15 +69,16 @@ const handleSubmit = async () => {
         alert.value = ''
     }
     const user = {
-        id: generateID(),
+        id: Date.parse(new Date().toISOString()),
         name: fullname.value,
         email: email.value,
-        password: password.value
+        password: password.value,
+        accessRights: accessRights.value || 'none'
     }
 
     const result = await registerUser(user);
     if (result) {
-        await router.push({ name: 'login' });
+        await router.push({ name: 'administrator' });
     } else {
         alert.value = 'error';
     }

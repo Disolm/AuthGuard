@@ -2,6 +2,7 @@ import {createRouter, createWebHistory,} from 'vue-router'
 import type {Router} from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import {authGuard} from "@/router/authGuard";
+import type {RouteLocationNormalized} from 'vue-router'
 
 export const routes = [
     {
@@ -28,10 +29,23 @@ export const routes = [
     {
         path: '/administrator',
         name: 'administrator',
+        redirect: (to:RouteLocationNormalized) => ({ name: 'administrator.usersInfo', params: to.params }),
         meta: {
             requireAuth: true,
         },
-        component: () => import('../views/AdministrationView.vue')
+        component: () => import('../views/AdministrationView.vue'),
+        children: [
+            {
+                path: 'users',
+                name: 'administrator.usersInfo',
+                component: () => import('../views/UsersEditView.vue'),
+            },
+            {
+                path: 'register',
+                name: 'administrator.userRegister',
+                component: () => import('../views/RegisterView.vue'),
+            },
+        ]
     },
     {
         path: '/login',
@@ -45,7 +59,7 @@ export const routes = [
         path: '/register',
         name: 'register',
         meta: {
-            requireGuest: true,
+            requireAuth: true,
         },
         component: () => import('../views/RegisterView.vue')
     },

@@ -8,13 +8,6 @@
             >
                 Вход
             </router-link>
-            <router-link
-                :to="{name: 'register'}"
-                class="nav__link"
-                exact-active-class="nav__link_active"
-            >
-                Регистрация
-            </router-link>
         </template>
         <template v-if="authStore.isAuthenticated">
             <RouterLink
@@ -34,7 +27,6 @@
                 журнал продаж
             </RouterLink>
             <RouterLink
-                v-if="!accessToPages('administrator')"
                 :to="{name: 'administrator'}"
                 class="nav__link"
                 exact-active-class="nav__link_active"

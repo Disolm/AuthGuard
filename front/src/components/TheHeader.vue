@@ -13,7 +13,8 @@ import TheLogo from "@/components/TheLogo.vue";
 
 <style scoped lang="scss">
 .header {
-    height: $height-header;
+    min-height: $height-header;
+    padding-bottom: 10px;
     background-color: var(--blue-light);
     text-align: center;
     display: flex;

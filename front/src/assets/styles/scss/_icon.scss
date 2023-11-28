@@ -1,0 +1,18 @@
+@mixin icon-edit {
+    border-right: 12px;
+    &_click {
+        @include click-icon;
+    }
+}
+
+@mixin click-icon {
+    cursor: pointer;
+    border-radius: 50%;
+    &:hover {
+        background: var(--grey);
+    }
+
+    &:active {
+        background: var(--grey-3);
+    }
+}
