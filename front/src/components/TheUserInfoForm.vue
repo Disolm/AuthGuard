@@ -30,7 +30,7 @@
                     :modelValue="userFormatted(key, <IUser>localUser)"
                     @update:modelValue="changeInput(key, $event)"
                 />
-<!--                :type="item.type"-->
+                <!--                :type="item.type"-->
             </template>
         </TheUserInfoLine>
     </div>
@@ -43,19 +43,21 @@ import UiInput from "@/components/UiInput.vue";
 import {accessRights, accessRightsArr, titleKey} from "@/composables/permanent";
 import type {IUser} from "@/types";
 import {ref, watch} from "vue";
-import type {shallowRef} from "vue";
+import type {Ref} from "vue";
 import {klona} from "klona";
+
 interface IProps {
     clickOnEdit: boolean
     user: IUser
 }
+
 const props = defineProps<IProps>()
-const localUser: shallowRef<IUser | null> = ref(klona(props.user))
+const localUser: Ref<IUser> = ref(klona(props.user)) as Ref<IUser>
 const emit = defineEmits(['localUserChang'])
-watch(() => localUser.value, ()=> {
+watch(() => localUser.value, () => {
     emit('localUserChang', localUser.value)
-},{ deep: true })
-const userFormatted = (key:string, userData:IUser):string => {
+}, {deep: true})
+const userFormatted = (key: string, userData: IUser): string => {
     if (!userData) return ''
     if (key === 'password' && !props.clickOnEdit) {
         const length: number = userData[key]?.length || 6
