@@ -27,6 +27,7 @@
                 журнал продаж
             </RouterLink>
             <RouterLink
+                v-if="!accessToPages('administrator')"
                 :to="{name: 'administrator'}"
                 class="nav__link"
                 exact-active-class="nav__link_active"

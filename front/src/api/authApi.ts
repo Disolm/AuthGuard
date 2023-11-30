@@ -28,6 +28,21 @@ export async function setUsersFromServer(users: TypeUsers) {
 
 export async function loginUser(email: string, password: string): Promise<TypeResultUser> {
     let result: TypeResultUser = {success: false, data: null}
+    const localUsers: TypeUsers | null = getUsersArrayFromLocalStorage()
+    if (localUsers) {
+        const resultId: number = localUsers.findIndex((user: IUser): boolean => {
+            return user.email === email && user.password === password
+        })
+
+        const success: boolean = resultId !== -1
+        if (success) {
+            return {
+                data: localUsers[resultId],
+                success: success
+            }
+
+        }
+    }
     await httpClient.get('')
         .then(response => {
             const resultId: number = response.data.findIndex((user: IUser): boolean => {
